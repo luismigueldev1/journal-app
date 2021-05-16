@@ -1,0 +1,16 @@
+@import "./base/settings";
+@import "./base/base";
+
+//pages
+@import "./pages/LoginPage";
+
+@import "./pages/JounalPage";
+
+//components
+@import "./components/auth";
+@import "./components/Sidebar";
+@import "./components/JournalEntries";
+@import "./components/JournalEntry";
+@import "./components/NothingSelected";
+@import "./components/Note";
+@import "./components/NoteAppBar";

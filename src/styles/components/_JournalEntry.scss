@@ -1,0 +1,36 @@
+.journal__entry {
+  background-color: white;
+  border-radius: 4px;
+  color: $dark-grey;
+  overflow: hidden;
+  margin-bottom: 10px;
+  display: flex;
+
+  .journal__entry-picture {
+    height: 90px;
+    width: 120px;
+    background-size: cover;
+    background-position: center;
+    background-image: url("https://media.istockphoto.com/vectors/realistic-full-moon-vector-id584764738?s=612x612");
+  }
+
+  .journal__entry-body {
+    padding: 10px;
+  }
+  .journal__entry-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .journal__entry-content {
+    font-size: 12px;
+  }
+
+  .journal__entry-date-box {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    font-size: 14px;
+  }
+}

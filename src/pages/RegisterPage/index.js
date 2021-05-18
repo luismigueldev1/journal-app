@@ -1,31 +1,91 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "../../hooks/useForm";
+import { isFormValid } from "./functions";
+import { registerWithEmailAndPasswordAction } from "../../actions/authActions";
+import { removeErrorAction } from "../../actions/uiActions";
 
 export default function RegisterPage() {
+  const [values, handleInputChange] = useForm({
+    name: "Luis Miguel",
+    email: "luismiguel@gmail.com",
+    password: "123456",
+    password2: "123456",
+  });
+
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.ui);
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    if (isFormValid(dispatch, values)) {
+      dispatch(
+        registerWithEmailAndPasswordAction(
+          values.email,
+          values.password,
+          values.name
+        )
+      );
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeErrorAction());
+    };
+  }, [dispatch]);
+
   return (
-    <div>
+    <div className="auth__container">
       <h3 className="text--center">Register Page</h3>
 
-      <form>
+      {error && (
+        <div className="alert alert-danger">
+          <p className="alert-title ">{error}</p>
+        </div>
+      )}
+
+      <form onSubmit={handleRegister}>
         <div className="form__control">
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" />
+          <input
+            type="text"
+            name="name"
+            value={values.name}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form__control">
           <label htmlFor="email">Email</label>
-          <input type="text" name="email" />
+          <input
+            type="text"
+            name="email"
+            value={values.email}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form__control">
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" />
+          <input
+            type="password"
+            name="password"
+            value={values.password}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form__control">
           <label htmlFor="password2">Repeat password</label>
-          <input type="password" name="password2" />
+          <input
+            type="password"
+            name="password2"
+            value={values.password2}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form__control">
-          <button type="submit" className="pointer">
-            Register
+          <button type="submit" className="pointer" disabled={loading}>
+            {loading ? "Loading..." : "Register"}
           </button>
         </div>
 
@@ -34,7 +94,7 @@ export default function RegisterPage() {
           <p>
             <b>Login with social:</b>
           </p>
-          <button className="pointer">
+          <button className="pointer mt-1">
             <picture>
               <img src="/assets/google-logo.png" alt="Google Login" />
             </picture>

@@ -1,20 +1,49 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { firebase } from "../services/firebase/firebase-config";
 import JournalPage from "../pages/JournalPage";
 import AuthRouter from "./AuthRouter";
 
+import { loginAction } from "../actions/authActions";
+import Loader from "../components/Loader";
+
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
+
 export default function AppRouter() {
+  const [checking, setChecking] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user?.uid) {
+        dispatch(loginAction(user.uid, user.displayName));
+        setIsLogged(true);
+      } else {
+        setIsLogged(false);
+      }
+      setChecking(false);
+    });
+  }, [dispatch, setChecking, setIsLogged]);
+
+  if (checking) {
+    return <Loader />;
+  }
+
   return (
     <Router>
       <Switch>
-        <Route path="/auth" component={AuthRouter} />
-        <Route exact path="/" component={JournalPage} />
-        <Redirect to="/auth/login" />
+        <PublicRoute path="/auth" component={AuthRouter} isAuth={isLogged} />
+
+        <PrivateRoute
+          exact
+          path="/"
+          component={JournalPage}
+          isAuth={isLogged}
+        />
+
+        <Redirect exact to="/" />
       </Switch>
     </Router>
   );

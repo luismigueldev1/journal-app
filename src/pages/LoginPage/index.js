@@ -1,23 +1,70 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  loginWithEmailAndPasswordAction,
+  loginWithGoogleProvider,
+} from "../../actions/authActions";
+import { removeErrorAction } from "../../actions/uiActions";
+import { useForm } from "../../hooks/useForm";
 
 export default function LoginPage() {
+  const [values, handleInputChange] = useForm({
+    email: "luismiguel@gmail.com",
+    password: "123456",
+  });
+
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.ui);
+  const { error } = useSelector((state) => state.ui);
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    dispatch(loginWithEmailAndPasswordAction(values.email, values.password));
+  };
+
+  const handleGoogleLogin = (event) => {
+    event.preventDefault();
+    dispatch(loginWithGoogleProvider());
+  };
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeErrorAction());
+    };
+  }, [dispatch]);
   return (
-    <div>
+    <div className="auth__container">
       <h3 className="text--center">Login Page</h3>
 
-      <form>
+      {error && (
+        <div className="alert alert-danger">
+          <p className="alert-title ">{error}</p>
+        </div>
+      )}
+
+      <form onSubmit={handleLogin}>
         <div className="form__control">
           <label htmlFor="email">Email</label>
-          <input type="text" name="email" />
+          <input
+            type="text"
+            name="email"
+            value={values.email}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form__control">
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" />
+          <input
+            type="password"
+            name="password"
+            value={values.password}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form__control">
-          <button type="submit" className="pointer">
-            Login
+          <button type="submit" className="pointer" disabled={loading}>
+            {loading ? "Loading.." : "Login"}
           </button>
         </div>
 
@@ -26,7 +73,7 @@ export default function LoginPage() {
           <p>
             <b>Login with social:</b>
           </p>
-          <button className="pointer">
+          <button className="pointer mt-1" onClick={handleGoogleLogin}>
             <picture>
               <img src="/assets/google-logo.png" alt="Google Login" />
             </picture>

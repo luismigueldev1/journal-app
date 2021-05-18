@@ -1,3 +1,7 @@
+.auth__container {
+  max-width: 260px;
+}
+
 .form__control {
   display: flex;
   flex-direction: column;
@@ -14,6 +18,15 @@
     margin-top: 10px;
     background-color: $primary;
     color: white;
+    border: none;
+    transition: all ease-in 0.3s;
+
+    &:hover {
+      background-color: darken($color: $primary, $amount: 30);
+    }
+    &:disabled {
+      background-color: desaturate($color: $primary, $amount: 30);
+    }
   }
 }
 .google__login {
@@ -29,6 +42,12 @@
     justify-content: space-between;
     background-color: $primary;
     border: none;
+    box-shadow: $shadow;
+    transition: all ease-in 0.3s;
+
+    &:hover {
+      background-color: darken($color: $primary, $amount: 30);
+    }
 
     picture {
       width: 36px;
@@ -53,4 +72,21 @@
   display: flex;
   justify-content: center;
   margin-top: 15px;
+}
+
+.alert {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 13px;
+  text-align: center;
+  color: white;
+
+  .alert-title {
+    font-weight: bold;
+  }
+}
+
+.alert-danger {
+  background-color: $red;
 }

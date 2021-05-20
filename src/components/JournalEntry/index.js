@@ -1,19 +1,32 @@
 import React from "react";
+import dayjs from "dayjs";
+import { useDispatch } from "react-redux";
+import { activeNoteAction } from "../../actions/notesActions";
 
-export default function JournalEntry({ entry }) {
+export default function JournalEntry({ note }) {
+  const date = dayjs(note.date);
+  const dispatch = useDispatch();
+
+  const handleActiveNote = () => {
+    dispatch(activeNoteAction(note.id, note));
+  };
   return (
-    <div className="journal__entry mr-1 pointer">
-      <div className="journal__entry-picture"></div>
+    <div className="journal__entry mr-1 pointer" onClick={handleActiveNote}>
+      {note.url ? (
+        <div className="journal__entry-picture">
+          <img src={note.url} alt={note.title} />
+        </div>
+      ) : (
+        <div className="journal__entry-picture"></div>
+      )}
       <div className="journal__entry-body">
-        <h3 className="journal__entry-title">Un nuevo dia</h3>
-        <p className="journal__entry-content">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, itaque.
-        </p>
+        <h3 className="journal__entry-title">{note.title}</h3>
+        <p className="journal__entry-content">{note.body}</p>
       </div>
 
       <div className="journal__entry-date-box">
-        <span>Monday</span>
-        <h4>28</h4>
+        <span>{date.format("MMM")}</span>
+        <h4>{date.format("DD")}</h4>
       </div>
     </div>
   );

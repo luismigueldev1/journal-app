@@ -43,7 +43,10 @@ export default function LoginPage() {
         </div>
       )}
 
-      <form onSubmit={handleLogin}>
+      <form
+        onSubmit={handleLogin}
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <div className="form__control">
           <label htmlFor="email">Email</label>
           <input

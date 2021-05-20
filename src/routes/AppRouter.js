@@ -10,16 +10,18 @@ import Loader from "../components/Loader";
 
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import { startGetNotes } from "../actions/notesActions";
 
 export default function AppRouter() {
   const [checking, setChecking] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (user?.uid) {
         dispatch(loginAction(user.uid, user.displayName));
         setIsLogged(true);
+        dispatch(startGetNotes());
       } else {
         setIsLogged(false);
       }

@@ -46,7 +46,10 @@ export default function RegisterPage() {
         </div>
       )}
 
-      <form onSubmit={handleRegister}>
+      <form
+        onSubmit={handleRegister}
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <div className="form__control">
           <label htmlFor="name">Name</label>
           <input

@@ -10,6 +10,7 @@ import {
   startLoadingAction,
 } from "./uiActions";
 
+import { clearNotesAfterLogoutAction } from "./notesActions";
 export const loginWithEmailAndPasswordAction = (email, password) => {
   return (dispatch) => {
     dispatch(startLoadingAction());
@@ -72,7 +73,10 @@ export const loginAction = (uid, displayName) => {
 
 export const startLogoutAction = () => {
   return async (dispatch) => {
-    await firebase.auth().signOut().then(dispatch(logoutAction()));
+    await firebase.auth().signOut();
+
+    dispatch(logoutAction());
+    dispatch(clearNotesAfterLogoutAction());
   };
 };
 

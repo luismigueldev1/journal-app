@@ -4,14 +4,19 @@
   color: $dark-grey;
   overflow: hidden;
   margin-bottom: 10px;
-  display: flex;
-
+  display: grid;
+  grid-template-columns: 100px 1fr 0.3fr;
   .journal__entry-picture {
     height: 90px;
-    width: 120px;
+    width: 90px;
     background-size: cover;
     background-position: center;
-    background-image: url("https://media.istockphoto.com/vectors/realistic-full-moon-vector-id584764738?s=612x612");
+    background-repeat: none;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .journal__entry-body {

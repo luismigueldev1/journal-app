@@ -43,3 +43,14 @@
     box-shadow: $shadow;
   }
 }
+
+.btn-danger {
+  background-color: $red;
+  color: white;
+  padding: 10px;
+  transition: all ease-in 0.3s;
+
+  &:hover {
+    background-color: darken($color: $red, $amount: 10);
+  }
+}

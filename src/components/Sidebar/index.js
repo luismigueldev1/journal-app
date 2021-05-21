@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogoutAction } from "../../actions/authActions";
 import { addNewEntryAction } from "../../actions/notesActions";
 import JournalEntries from "../JournalEntries";
 
 export default function Sidebar() {
+  const [toogleMobile, setToogleMobile] = useState(false);
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.auth);
   const handleLogout = () => {
@@ -13,10 +14,31 @@ export default function Sidebar() {
 
   const handleAddEntry = () => {
     dispatch(addNewEntryAction());
+    setToogleMobile(!toogleMobile);
+  };
+
+  const handleMenuMobile = () => {
+    setToogleMobile(!toogleMobile);
   };
   return (
     <div>
-      <aside className="journal__sidebar">
+      <button
+        onClick={handleMenuMobile}
+        className={
+          toogleMobile
+            ? "journal__sidebar-toogleMobile active"
+            : "journal__sidebar-toogleMobile "
+        }
+      >
+        <i
+          className={toogleMobile ? "fas fa-times fa-lg" : "fas fa-bars fa-lg"}
+        ></i>
+      </button>
+      <aside
+        className={
+          toogleMobile ? "journal__sidebar active" : "journal__sidebar"
+        }
+      >
         <div className="journal__sidebar-navbar mt-1">
           <h3>
             <i className="far fa-moon mr-1"></i>
@@ -37,7 +59,7 @@ export default function Sidebar() {
           <p>New entry</p>
         </div>
 
-        <JournalEntries />
+        <JournalEntries handleMenuMobile={handleMenuMobile} />
       </aside>
     </div>
   );

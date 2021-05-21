@@ -1,4 +1,5 @@
 import React from "react";
+import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import {
   saveNoteOnFirebase,
@@ -8,6 +9,7 @@ import {
 export default function NoteAppBar() {
   const dispatch = useDispatch();
   const { activeNote } = useSelector((state) => state.notes);
+  const date = dayjs(activeNote.date);
 
   const handleSaveNote = () => {
     dispatch(saveNoteOnFirebase({ ...activeNote, url: "" }));
@@ -25,7 +27,7 @@ export default function NoteAppBar() {
   };
   return (
     <div className="notes__appbar">
-      <span>28 de agosto 2020</span>
+      <span>{date.format("MMM, D, YYYY")}</span>
       <input
         type="file"
         style={{ display: "none" }}

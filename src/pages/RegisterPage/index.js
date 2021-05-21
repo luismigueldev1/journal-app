@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { isFormValid } from "./functions";
-import { registerWithEmailAndPasswordAction } from "../../actions/authActions";
+import {
+  loginWithGoogleProvider,
+  registerWithEmailAndPasswordAction,
+} from "../../actions/authActions";
 import { removeErrorAction } from "../../actions/uiActions";
 
 export default function RegisterPage() {
@@ -35,6 +38,11 @@ export default function RegisterPage() {
       dispatch(removeErrorAction());
     };
   }, [dispatch]);
+
+  const handleGoogleLogin = (event) => {
+    event.preventDefault();
+    dispatch(loginWithGoogleProvider());
+  };
 
   return (
     <div className="auth__container">
@@ -97,7 +105,7 @@ export default function RegisterPage() {
           <p>
             <b>Login with social:</b>
           </p>
-          <button className="pointer mt-1">
+          <button className="pointer mt-1" onClick={handleGoogleLogin}>
             <picture>
               <img src="/assets/google-logo.png" alt="Google Login" />
             </picture>

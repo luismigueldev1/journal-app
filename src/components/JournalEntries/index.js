@@ -2,12 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import JournalEntry from "../JournalEntry";
 
-export default function JournalEntries() {
+export default function JournalEntries({ handleMenuMobile }) {
   const { notes } = useSelector((state) => state.notes);
   return (
     <div className="journal__entries">
       {notes.map((note) => (
-        <JournalEntry key={note.id} note={note} />
+        <JournalEntry
+          key={note.id}
+          note={note}
+          handleMenuMobile={handleMenuMobile}
+        />
       ))}
     </div>
   );

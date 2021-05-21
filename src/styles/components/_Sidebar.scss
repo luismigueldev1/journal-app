@@ -30,11 +30,42 @@
       }
     }
   }
+}
 
-  .journal__new-entry {
-    transition: color 0.3s ease;
-    &:hover {
-      color: darken($color: white, $amount: 30);
+@media screen and (max-width: 720px) {
+  .journal__sidebar-toogleMobile {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    color: white;
+    z-index: 3;
+  }
+  .journal__sidebar {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: -400px;
+    transition: all ease-in 0.3s;
+    min-width: 70%;
+
+    &.active {
+      left: 0;
     }
+
+    .journal__sidebar-navbar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &:first-child {
+        margin-left: 40px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .journal__sidebar-toogleMobile {
+    display: none;
   }
 }

@@ -3,12 +3,13 @@ import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 import { activeNoteAction } from "../../actions/notesActions";
 
-export default function JournalEntry({ note }) {
+export default function JournalEntry({ note, handleMenuMobile }) {
   const date = dayjs(note.date);
   const dispatch = useDispatch();
 
   const handleActiveNote = () => {
     dispatch(activeNoteAction(note.id, note));
+    handleMenuMobile((prevState) => !prevState);
   };
   return (
     <div className="journal__entry mr-1 pointer" onClick={handleActiveNote}>

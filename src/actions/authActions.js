@@ -14,7 +14,7 @@ import { clearNotesAfterLogoutAction } from "./notesActions";
 export const loginWithEmailAndPasswordAction = (email, password) => {
   return (dispatch) => {
     dispatch(startLoadingAction());
-    firebase
+    return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(({ user }) => {

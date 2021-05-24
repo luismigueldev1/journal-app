@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas <RegisterPage/> Debe de mostrarse correctamente 1`] = `
+<div
+  className="auth__container"
+>
+  <h3
+    className="text--center"
+  >
+    Register Page
+  </h3>
+  <form
+    className="animate__animated animate__fadeIn animate__faster"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form__control"
+    >
+      <label
+        htmlFor="name"
+      >
+        Name
+      </label>
+      <input
+        name="name"
+        onChange={[Function]}
+        type="text"
+        value="Luis Miguel"
+      />
+    </div>
+    <div
+      className="form__control"
+    >
+      <label
+        htmlFor="email"
+      >
+        Email
+      </label>
+      <input
+        name="email"
+        onChange={[Function]}
+        type="text"
+        value="luismiguel@gmail.com"
+      />
+    </div>
+    <div
+      className="form__control"
+    >
+      <label
+        htmlFor="password"
+      >
+        Password
+      </label>
+      <input
+        name="password"
+        onChange={[Function]}
+        type="password"
+        value="123456"
+      />
+    </div>
+    <div
+      className="form__control"
+    >
+      <label
+        htmlFor="password2"
+      >
+        Repeat password
+      </label>
+      <input
+        name="password2"
+        onChange={[Function]}
+        type="password"
+        value="123456"
+      />
+    </div>
+    <div
+      className="form__control"
+    >
+      <button
+        className="pointer"
+        disabled={false}
+        type="submit"
+      >
+        Register
+      </button>
+    </div>
+    <hr />
+    <div
+      className="google__login pointer"
+    >
+      <p>
+        <b>
+          Login with social:
+        </b>
+      </p>
+      <button
+        className="pointer mt-1"
+        onClick={[Function]}
+      >
+        <picture>
+          <img
+            alt="Google Login"
+            src="/assets/google-logo.png"
+          />
+        </picture>
+        <p>
+          <b>
+            Sign in with google
+          </b>
+        </p>
+      </button>
+    </div>
+    <div
+      className="create__account"
+    >
+      <a
+        href="/auth/login"
+        onClick={[Function]}
+      >
+        Already register? Login
+      </a>
+    </div>
+  </form>
+</div>
+`;

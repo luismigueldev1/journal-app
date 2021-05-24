@@ -76,7 +76,10 @@ export default function LoginPage() {
           <p>
             <b>Login with social:</b>
           </p>
-          <button className="pointer mt-1" onClick={handleGoogleLogin}>
+          <button
+            className="pointer mt-1 google-login-button"
+            onClick={handleGoogleLogin}
+          >
             <picture>
               <img src="/assets/google-logo.png" alt="Google Login" />
             </picture>

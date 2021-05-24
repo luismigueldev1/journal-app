@@ -16,7 +16,7 @@ export const fileUpload = async (file) => {
       const data = await response.json();
       return data.secure_url;
     } else {
-      throw await response.json();
+      return null;
     }
   } catch (error) {
     throw error;
